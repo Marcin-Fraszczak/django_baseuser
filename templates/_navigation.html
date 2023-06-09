@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+Hello {{user}}! <br>
+<a href="{% url 'users:logout' %}">Log out</a><br>
+{% else %}
+<a href="{% url 'users:register' %}">Register</a><br>
+{% endif %}
+<a href="{% url 'users:home' %}">Home</a><br>
