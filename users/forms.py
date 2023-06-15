@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.password_validation import validate_password
+
 from .models import CustomUser
-from .validators import custom_password_validator
 
 
 class CustomUserCreationForm(forms.ModelForm):
@@ -9,7 +10,6 @@ class CustomUserCreationForm(forms.ModelForm):
 	password = forms.CharField(
 		label="Password",
 		widget=forms.PasswordInput,
-		validators=[custom_password_validator]
 	)
 
 	class Meta:
@@ -18,18 +18,18 @@ class CustomUserCreationForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		# Save the provided password in hashed format
+		print("saving")
 		user = super().save(commit=False)
 		user.set_password(self.cleaned_data["password"])
 		if commit:
 			user.save()
 		return user
 
-	# def clean(self):
-	# 	cleaned_data = super().clean()
-	# 	email = cleaned_data.get("email")
-	# 	password = cleaned_data.get("password")
-	# 	if password and email:
-	# 		similarity_password_validator(password, email)
+	def clean_password(self):
+		pass
+		# checks provided password against both build-in and custom password validators
+		# password = self.cleaned_data['password']
+		# validate_password(password)
 
 
 class CustomUserChangeForm(forms.ModelForm):
