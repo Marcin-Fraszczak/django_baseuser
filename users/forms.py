@@ -1,24 +1,30 @@
-from django import forms
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.password_validation import validate_password
+from django import forms
+from .models import CustomUser, Idea
 
-from .models import CustomUser
+GROUPS_CHOICES = [
+	("No group", "No group"),
+	("H/Div", "H/Div"),
+	("H/Sec", "H/Sec"),
+	("H/Ple", "H/Ple"),
+]
 
 
-class CustomUserCreationForm(forms.ModelForm):
-	"""A form for creating new users. Includes all the required fields."""
+class RegisterForm(forms.ModelForm):
 	password = forms.CharField(
 		label="Password",
 		widget=forms.PasswordInput,
 	)
+	group = forms.ChoiceField(
+		label="Group",
+		choices=GROUPS_CHOICES,
+	)
 
 	class Meta:
 		model = CustomUser
-		fields = ["email", ]
+		fields = ('username',)
 
 	def save(self, commit=True):
-		# Save the provided password in hashed format
-		print("saving")
 		user = super().save(commit=False)
 		user.set_password(self.cleaned_data["password"])
 		if commit:
@@ -26,20 +32,24 @@ class CustomUserCreationForm(forms.ModelForm):
 		return user
 
 	def clean_password(self):
-		pass
-		# checks provided password against both build-in and custom password validators
-		# password = self.cleaned_data['password']
-		# validate_password(password)
+		password = self.cleaned_data['password']
+		validate_password(password)
+		return password
 
 
-class CustomUserChangeForm(forms.ModelForm):
-	"""A form for updating users. Includes all the fields on
-	the user, but replaces the password field with admin's
-	disabled password hash display field.
-	"""
 
-	password = ReadOnlyPasswordHashField()
+class NumberForm(forms.Form):
+	in_data = forms.CharField(
+		label="Specify numbers to sort separated by coma.",
+		widget=forms.TextInput(
+			attrs={
+				"placeholder": "Example: 12, 2, 101, -4 ...",
+				"class": "my-3",
+			})
+	)
 
+
+class IdeaForm(forms.ModelForm):
 	class Meta:
-		model = CustomUser
-		fields = ["email", "password", "is_active", "is_admin"]
+		model = Idea
+		fields = ("title", "content")
