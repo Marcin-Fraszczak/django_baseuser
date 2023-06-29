@@ -4,15 +4,16 @@
 
 {% block content %}
     {% load crispy_forms_tags %}
-    <form method="post">
+    <h2>Numbers sorting form</h2>
+    <form method="post" id="numbers_sorting_form">
         {% csrf_token %}
         {{ form|crispy }}
         <div class="d-flex my-3">
             <button class="btn btn-success mx-1 w-50 shadow" type="submit">Sort</button>
             <a class="btn btn-danger mx-1 w-50 shadow" href="{% url 'users:home' %}">Clear</a>
         </div>
-        <input type="text" id="out-data" placeholder="results will be displayed here..."
-               class="form-control shadow-sm" disabled value="{{ result|join:"   " }}">
+        <input type="text" id="out-data" placeholder="Results will be displayed here ..."
+               class="form-control shadow-sm" disabled value="{{ result|join:" " }}">
     </form>
 
 {% endblock content %}

@@ -40,11 +40,12 @@ class RegisterForm(forms.ModelForm):
 
 class NumberForm(forms.Form):
 	in_data = forms.CharField(
-		label="Specify numbers to sort separated by coma.",
+		label="Specify numbers to sort separated by a space",
 		widget=forms.TextInput(
 			attrs={
 				"placeholder": "Example: 12, 2, 101, -4 ...",
 				"class": "my-3",
+				"id": "numbers_sorting_input",
 			})
 	)
 

@@ -13,6 +13,14 @@
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
+
+<style>
+    {#Removes this anoying asterisk symbol (*) added by cripsy-forms#}
+    .asteriskField {
+        display: none;
+    }
+</style>
+
 {% block navigation %}{% include "_navigation.html" %}{% endblock navigation %}
 
 <section class="my-5">

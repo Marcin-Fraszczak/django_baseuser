@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render, redirect
+from re import sub as re_sub
 
 from .email import send_message
 from .forms import RegisterForm, NumberForm, IdeaForm
@@ -26,9 +27,14 @@ class HomeView(View):
 		form = NumberForm(request.POST)
 		if form.is_valid():
 			try:
-				to_sort = form.cleaned_data.get("in_data").split(",")
+				# clearing any additional spaces
+				to_sort = re_sub(" {2,}", " ", form.cleaned_data.get("in_data"))
+				# creating a list of values
+				to_sort = to_sort.split(" ")
+				# value type check
 				to_sort_cleaned = map(float, to_sort)
 				result = sorted(to_sort_cleaned)
+				# avoiding unnecessary dots and zeros
 				result = [int(item) if int(item) == item else item for item in result]
 				return render(request, "home.html", context={"form": form, "result": result})
 			except ValueError as e:
