@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block title %}Testing{% endblock title %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <h2>Automatic tests</h2>
+    <form method="post" id="testing_form">
+        {% csrf_token %}
+        <button class="btn btn-success mx-1 w-50 shadow" type="submit">Run Tests!</button>
+    </form>
+
+{% endblock content %}
+

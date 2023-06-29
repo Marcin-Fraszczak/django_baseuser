@@ -2,7 +2,7 @@
 Unit tests for part 2 of the recruitment task (email functionalities).
 
 Run command with report creation:
-pytest --html=tests/report.html --self-contained-html
+pytest --html=templates/tests/report.html --self-contained-html
 
 """
 import pytest

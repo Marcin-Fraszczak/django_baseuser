@@ -1,3 +1,4 @@
+import pytest
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -150,3 +151,13 @@ class ProfileView(LoginRequiredMixin, View):
 			user.save()
 
 		return redirect("users:profile")
+
+
+class TestsView(View):
+	def get(self, request):
+		return render(request, "test_template.html")
+
+	def post(self, request):
+		args_string = "--html=templates/tests/report.html --self-contained-html"
+		pytest.main(args_string.split(" "))
+		return render(request, "tests/final_report.html")

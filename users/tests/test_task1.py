@@ -2,7 +2,7 @@
 Unit tests for part 1 of the recruitment task (numbers sorting app).
 
 Run command with report creation:
-pytest --html=tests/report.html --self-contained-html
+pytest --html=templates/tests/report.html --self-contained-html
 
 """
 from random import shuffle
