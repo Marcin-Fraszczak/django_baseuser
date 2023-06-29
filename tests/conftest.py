@@ -8,7 +8,7 @@ from users.models import Idea
 
 
 def pytest_html_report_title(report):
-    report.title = "Test report task 1 and task 2 of BitByBit recruitment process."
+    report.title = "Test report task_1 and task_2 of BitByBit recruitment process."
 
 
 @pytest.fixture
