@@ -6,9 +6,9 @@ To run it locally:
 
 ``git clone git@github.com:Marcin-Fraszczak/django_baseuser.git``
 
-2) Inside the root directory (Docker needed):
+2) Inside the root directory (Docker needed, ~20 seconds):
 
-``docker-compose up``
+`docker-compose up``
 
 3) This will create and run the container with Django app, autmotically create the database and should open the browser.If not you can manually navigate to :
 
@@ -17,3 +17,8 @@ To run it locally:
 4) While using the app, you can choose 'Tests' from navbar and run automatic tests from inside the app.
 5) Report will be created and displayed in html.
 6) On the report you can click 'Show all details' to reveal documentation for testing.
+
+------------------
+
+7) If you want to send real emails, create ``.env`` file in the root directory and populate it with data based on ``.env_sample`` file.
+8) Not doing this is still ok, django has it's own simple smtp server, to enable it and see emails in the console, run another terminal:
