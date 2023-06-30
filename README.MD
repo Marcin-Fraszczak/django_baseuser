@@ -4,7 +4,7 @@ To run it locally:
 
 1) Clone the repo:
 
-``git clone git@github.com:Marcin-Fraszczak/django_baseuser.git``
+``git clone https://github.com/Marcin-Fraszczak/django_baseuser.git``
 
 2) Inside the root directory (Docker needed, ~20 seconds):
 
