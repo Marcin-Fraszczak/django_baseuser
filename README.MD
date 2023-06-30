@@ -8,9 +8,11 @@ To run it locally:
 
 2) Inside the root directory (Docker needed, ~20 seconds):
 
+``cd django_baseuser``
+
 ``docker-compose up``
 
-3) This will create and run the container with Django app, autmotically create the database and should open the browser.If not you can manually navigate to :
+3) This will create and run the container with Django app, navigate to:
 
 ``localhost:8000``
 
