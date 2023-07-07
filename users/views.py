@@ -1,4 +1,3 @@
-import pytest
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -15,7 +14,6 @@ from .email import send_message
 from .forms import RegisterForm, NumberForm, IdeaForm
 from .models import Idea
 from .validators import normalize_email
-from django.conf import settings
 
 User = get_user_model()
 
@@ -142,8 +140,7 @@ class IdeasView(LoginRequiredMixin, View):
 
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request):
-		key = settings.get("EMAIL_HOST")
-		return render(request, "users/profile.html", context={"key": key})
+		return render(request, "users/profile.html")
 
 	def post(self, request):
 		user = request.user
@@ -170,20 +167,8 @@ class TestsView(View):
 		return render(request, "test_template.html")
 
 	def post(self, request):
-		def test_app():
-			args_string = "--html=templates/tests/report.html --self-contained-html"
-			pytest.main(args_string.split(" "))
+		import subprocess
+		command = "pytest --html=templates/tests/report.html --self-contained-html"
+		subprocess.run(command.split(" "))
 
-		# from django.db import connection
-		# from django.conf import settings
-		# import os
-
-		# cursor = connection.cursor()
-		# database_name = os.path.join(settings.BASE_DIR, 'db.sqlite3')
-		# cursor.execute("", [database_name])
-
-		from multiprocessing import Process
-		p = Process(target=test_app)
-		p.run()
-
-		return render(request, "tests/report.html")
+		return render(request, "tests/final_report.html")
