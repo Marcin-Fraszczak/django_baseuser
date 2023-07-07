@@ -15,6 +15,7 @@ from .email import send_message
 from .forms import RegisterForm, NumberForm, IdeaForm
 from .models import Idea
 from .validators import normalize_email
+from django.conf import settings
 
 User = get_user_model()
 
@@ -141,7 +142,8 @@ class IdeasView(LoginRequiredMixin, View):
 
 class ProfileView(LoginRequiredMixin, View):
 	def get(self, request):
-		return render(request, "users/profile.html")
+		key = settings.get("EMAIL_HOST")
+		return render(request, "users/profile.html", context={"key": key})
 
 	def post(self, request):
 		user = request.user
@@ -168,6 +170,20 @@ class TestsView(View):
 		return render(request, "test_template.html")
 
 	def post(self, request):
-		args_string = "--html=templates/tests/report.html --self-contained-html"
-		pytest.main(args_string.split(" "))
-		return render(request, "tests/final_report.html")
+		def test_app():
+			args_string = "--html=templates/tests/report.html --self-contained-html"
+			pytest.main(args_string.split(" "))
+
+		# from django.db import connection
+		# from django.conf import settings
+		# import os
+
+		# cursor = connection.cursor()
+		# database_name = os.path.join(settings.BASE_DIR, 'db.sqlite3')
+		# cursor.execute("", [database_name])
+
+		from multiprocessing import Process
+		p = Process(target=test_app)
+		p.run()
+
+		return render(request, "tests/report.html")

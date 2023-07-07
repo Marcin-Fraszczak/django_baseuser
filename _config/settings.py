@@ -135,8 +135,8 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+	'django.contrib.staticfiles.finders.FileSystemFinder',
+	'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 ]
 
 # Default primary key field type
@@ -163,6 +163,9 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', False)
 EMAIL_USE_SSL = False
 
 MESSAGE_TAGS = {message_constants.ERROR: "danger"}
+
+# Run this command to create groups needed for tests:
+# python manage.py create_groups
 
 # Run this command in another terminal to start basic smtp server locally:
 # python -m smtpd -n -c DebuggingServer localhost:1025
