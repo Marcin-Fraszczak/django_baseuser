@@ -1,0 +1,12 @@
+<form method="post" id="subscribe_form">
+    {% csrf_token %}
+    {% if user.subscribed %}
+        <button class="btn btn-outline-success shadow" name="unsubscribe" style="width:22rem">
+        You are subscribed. Unsubscribe here.
+    {% else %}
+        <button class="btn btn-outline-warning shadow" name="subscribe" style="width:22rem">
+        You are not subscribed. Subscribe here.
+    {% endif %}
+    <i class="fa-solid fa-envelope ms-2"></i>
+    </button>
+</form>

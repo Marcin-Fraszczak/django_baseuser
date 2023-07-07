@@ -4,25 +4,44 @@
 
 {% block content %}
     {% load crispy_forms_tags %}
-    <h2>Add new Idea</h2>
-    <form method="post">
+
+    <div class="d-flex justify-content-around">
+        <h2>Add new Idea</h2>
+        {% include "partial_forms/_subscribe_form.html" %}
+    </div>
+
+    <form method="post" class="mt-5" novalidate>
         {% csrf_token %}
         {{ form|crispy }}
-        <button class="my-2 w-100 btn btn-primary">Add new Idea</button>
+        <button class="my-2 w-100 btn btn-primary shadow">Add new Idea</button>
     </form>
-    <h2 class="my-5">Existing Ideas:</h2>
+
+
+
+    <div class="d-flex justify-content-around mt-5 mb-4">
+        <h2>Existing Ideas:</h2>
+        {% include "partial_forms/_delete_ideas_form.html" %}
+    </div>
+
     <ul>
+        {% if not ideas %}
+            No ideas to display.
+        {% endif %}
+
         {% for idea in ideas %}
             <li>
                 <div class="d-flex justify-content-between">
                     <h3 class="mx-2 d-flex">{{ idea.title }}</h3>
+
                     <form method="post">
                         {% csrf_token %}
                         <button type="submit" name="delete_idea" value="{{ idea.pk }}"
-                                class="btn btn-outline-danger mx-2">
-                            Delete
+                                class="btn btn-outline-danger mx-2 shadow">
+                            Delete Idea
+                            <i class="fa-solid fa-trash"></i>
                         </button>
                     </form>
+
                 </div>
                 <span class="d-flex">{{ idea.content }}</span>
             </li>

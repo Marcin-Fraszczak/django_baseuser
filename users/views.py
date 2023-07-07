@@ -76,7 +76,7 @@ class RegisterView(View):
 				existing_group.user_set.add(user)
 				user.save()
 				login(request, user)
-				messages.success(request, "Successfully registered user.")
+				messages.success(request, "Successfully registered new user.")
 				return redirect(reverse_lazy("users:profile"))
 			except IntegrityError:
 				form.add_error("email", "User with this email address already registered.")
@@ -110,8 +110,10 @@ class IdeasView(LoginRequiredMixin, View):
 
 	def post(self, request):
 		user = request.user
-		if "delete_idea" in request.POST:
-			idea_pk = request.POST.get('delete_idea')
+		if "delete_all_ideas" in request.POST:
+			Idea.objects.all().delete()
+		elif "delete_idea" in request.POST:
+			idea_pk = request.POST.get("delete_idea")
 			Idea.objects.filter(pk=idea_pk).delete()
 		elif "subscribe" in request.POST:
 			user.subscribed = True
@@ -143,12 +145,20 @@ class ProfileView(LoginRequiredMixin, View):
 
 	def post(self, request):
 		user = request.user
-		if "subscribe" in request.POST:
+		if "delete_account" in request.POST:
+			try:
+				User.objects.get(username=user).delete()
+				messages.success(request, "Account successfully deleted")
+			except User.DoesNotExist:
+				messages.error(request, "No such user in database!")
+			finally:
+				logout(request)
+				return redirect("users:home")
+		elif "subscribe" in request.POST:
 			user.subscribed = True
-			user.save()
 		elif "unsubscribe" in request.POST:
 			user.subscribed = False
-			user.save()
+		user.save()
 
 		return redirect("users:profile")
 

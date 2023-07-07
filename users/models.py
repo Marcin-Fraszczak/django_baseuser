@@ -6,7 +6,6 @@ from re import sub as re_sub
 
 class CustomUserManager(BaseUserManager):
 	def _create_user(self, username, password, is_staff, is_superuser, **extra_fields):
-		print("sdskfkjdhfkjhfkdjf")
 		if not username:
 			raise ValueError('Users must have an email address')
 		now = timezone.now()

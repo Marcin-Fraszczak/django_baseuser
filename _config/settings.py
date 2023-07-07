@@ -10,9 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from dotenv import load_dotenv
-import os
+from django.contrib.messages import constants as message_constants
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -86,6 +87,20 @@ DATABASES = {
 	}
 }
 
+# config for pythonanywhere:
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.mysql',
+# 		'NAME': os.getenv('MYSQL_NAME'),
+# 		'USER': os.getenv('MYSQL_USER'),
+# 		'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+# 		'HOST': os.getenv('MYSQL_HOST'),
+# 		'TEST': {
+# 			'NAME': os.getenv('MYSQL_TEST_NAME'),
+# 		},
+# 	}
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -117,6 +132,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -139,6 +161,8 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', False)
 EMAIL_USE_SSL = False
+
+MESSAGE_TAGS = {message_constants.ERROR: "danger"}
 
 # Run this command in another terminal to start basic smtp server locally:
 # python -m smtpd -n -c DebuggingServer localhost:1025
