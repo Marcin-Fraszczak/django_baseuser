@@ -170,5 +170,4 @@ class TestsView(View):
 		import subprocess
 		command = "pytest --html=templates/tests/report.html --self-contained-html"
 		subprocess.run(command.split(" "))
-
 		return render(request, "tests/final_report.html")
