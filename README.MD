@@ -1,5 +1,9 @@
 ## Simple web app required for testing
 
+## Live version:
+
+https://self-testing.up.railway.app/users/tests/
+
 To run it locally:
 
 1) Clone the repo:
