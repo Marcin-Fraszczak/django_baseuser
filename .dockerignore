@@ -1,0 +1,11 @@
+.git
+.cache
+.venv*
+htmlcov
+*.*cache
+.pytest_cache
+env
+.env
+db.sqlite3
+.gitignore
+drivers
