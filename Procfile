@@ -1,1 +1,1 @@
-web:python manage.py migrate && gunicorn '_config.wsgi'
+web: sh start.sh
