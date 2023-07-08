@@ -1,1 +1,1 @@
-web: gunicorn 'django_baseuser.wsgi'
+web: gunicorn '_config.wsgi'
