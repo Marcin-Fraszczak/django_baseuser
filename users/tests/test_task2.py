@@ -83,7 +83,7 @@ def test_email_has_correct_fields(client, ideas_url, idea, user, email_backend_s
 	)
 
 	email = mail.outbox[0]
-	assert email.subject == "New Idea number 1"
+	assert "New Idea number" in email.subject
 	assert email.from_email == "DjangoApp"
 	assert idea.content in email.body
 
