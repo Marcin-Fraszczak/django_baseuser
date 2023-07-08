@@ -13,6 +13,6 @@ RUN pip install --upgrade pip && \
     python manage.py create_groups && \
     rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8000
+#EXPOSE 8000
 
-ENTRYPOINT python manage.py runserver 0.0.0.0:8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:$PORT"]
