@@ -21,7 +21,7 @@ User = get_user_model()
 class HomeView(View):
 	def get(self, request):
 		form = NumberForm()
-		return render(request, "home.html", context={"form": form})
+		return render(request, "users/home.html", context={"form": form})
 
 	def post(self, request):
 		form = NumberForm(request.POST)
@@ -36,13 +36,13 @@ class HomeView(View):
 				result = sorted(to_sort_cleaned)
 				# avoiding unnecessary dots and zeros
 				result = [int(item) if int(item) == item else item for item in result]
-				return render(request, "home.html", context={"form": form, "result": result})
+				return render(request, "users/home.html", context={"form": form, "result": result})
 			except ValueError as e:
 				form.add_error(None, "Invalid input!")
 
 		else:
 			form.add_error(None, "No input!")
-		return render(request, "home.html", context={"form": form})
+		return render(request, "users/home.html", context={"form": form})
 
 
 class LogoutView(View):
@@ -164,10 +164,21 @@ class ProfileView(LoginRequiredMixin, View):
 
 class TestsView(View):
 	def get(self, request):
-		return render(request, "test_template.html")
+		return render(request, "tests/test_template.html")
 
 	def post(self, request):
 		import subprocess
-		command = "pytest --html=templates/tests/report.html --self-contained-html"
+		import json
+		command = "pytest --cov=. --cov-report json:templates/tests/cov.json --html=templates/tests/report.html --self-contained-html"
 		subprocess.run(command.split(" "))
-		return render(request, "tests/final_report.html")
+
+		try:
+			with open('templates/tests/cov.json') as file:
+				data = json.load(file)
+				coverage = {item: data['files'][item]['summary']['percent_covered_display'] for item in data['files']}
+				coverage.update({"TOTAL": data['totals']['percent_covered_display']})
+		except (OSError, KeyError):
+			messages.error(request, "Could not read coverage file.")
+			coverage = {}
+
+		return render(request, "tests/final_report.html", context={"coverage": coverage})

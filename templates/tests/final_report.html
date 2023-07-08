@@ -3,6 +3,13 @@
 {% block title %}Test report{% endblock title %}
 
 {% block content %}
-{% include "tests/report.html" %}
-{% endblock content %}
+    {% include "tests/report.html" %}
+    <h2>Test coverage:</h2>
 
+    {% for line, percent in coverage.items %}
+        <div class="row">
+            <div class="col-6 text-end">{{ line }}</div>
+            <div class="col-6 text-start">{{ percent }} %</div>
+        </div>
+    {% endfor %}
+{% endblock content %}
