@@ -31,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['self-testing.up.railway.app', '127:0:0:1']
 # ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://self-testing.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://self-testing.up.railway.app']
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
 
