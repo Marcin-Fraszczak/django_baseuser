@@ -28,7 +28,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', "!!!not_secure!!!")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['self-testing.up.railway.app', '127:0:0:1']
+
+CSRF_TRUSTED_ORIGINS = ['https://self-testing.up.railway.app/']
 
 # Application definition
 
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
@@ -133,7 +136,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_FINDERS = [
 	'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -164,6 +167,8 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', False)
 EMAIL_USE_SSL = False
 
 MESSAGE_TAGS = {message_constants.ERROR: "danger"}
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Run this command to create groups needed for tests:
 # python manage.py create_groups
