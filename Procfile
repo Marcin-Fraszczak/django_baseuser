@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py create_groups && gunicorn '_config.wsgi'
+web: gunicorn '_config.wsgi'
