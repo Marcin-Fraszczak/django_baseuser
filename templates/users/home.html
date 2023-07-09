@@ -5,7 +5,7 @@
 {% block content %}
     {% load crispy_forms_tags %}
     <h2>Numbers sorting form</h2>
-    <form method="post" id="numbers_sorting_form">
+    <form method="post" id="numbers_sorting_form" novalidate>
         {% csrf_token %}
         {{ form|crispy }}
         <div class="d-flex my-3">
@@ -15,6 +15,13 @@
         <input type="text" id="out-data" placeholder="Results will be displayed here ..."
                class="form-control shadow-sm" disabled value="{{ result|join:" " }}">
     </form>
+
+    <h2 class="mt-5">Code available here:</h2>
+    <a href="https://github.com/Marcin-Fraszczak/django_baseuser"
+       class="btn btn-lg btn-outline-secondary my-3">
+        Go to Github
+        <i class="fa-brands fa-github"></i>
+    </a><br>
 
 {% endblock content %}
 

@@ -5,25 +5,32 @@
 {% block content %}
     {% load crispy_forms_tags %}
 
-    <div class="d-flex justify-content-around">
-        <h2>Add new Idea</h2>
-        {% include "partial_forms/_subscribe_form.html" %}
+    <div class="row mt-4">
+        <div class="col-12 col-lg-6">
+            <h2>Add new Idea</h2>
+        </div>
+        <div class="col-12 col-lg-6">
+            {% include "partial_forms/_subscribe_form.html" %}
+        </div>
     </div>
 
-    <form method="post" class="mt-5" novalidate>
+    <form method="post" class="mt-4" novalidate>
         {% csrf_token %}
         {{ form|crispy }}
         <button class="my-2 w-100 btn btn-primary shadow">Add new Idea</button>
     </form>
 
 
-
-    <div class="d-flex justify-content-around mt-5 mb-4">
-        <h2>Existing Ideas:</h2>
-        {% include "partial_forms/_delete_ideas_form.html" %}
+    <div class="row mt-4">
+        <div class="col-12 col-lg-6">
+            <h2>Existing Ideas:</h2>
+        </div>
+        <div class="col-12 col-lg-6">
+            {% include "partial_forms/_delete_ideas_form.html" %}
+        </div>
     </div>
 
-    <ul>
+    <ul class="mt-4">
         {% if not ideas %}
             No ideas to display.
         {% endif %}
