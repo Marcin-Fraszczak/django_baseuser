@@ -4,27 +4,43 @@
 
 {% block content %}
     {% load crispy_forms_tags %}
-    <form method="post" id="testing_form" class="mt-5">
+    <form method="post" id="testing_form" class="mt-3">
         {% csrf_token %}
         <button class="btn btn-success mx-1 w-50 shadow" type="submit">Run live server tests!</button>
     </form>
-    
-    <h2 class="mt-5">Code for the tests on the server:</h2>
-    <a href="https://github.com/Marcin-Fraszczak/django_baseuser/blob/railway/users/tests/test_task1.py"
-    class="btn btn-lg btn-outline-secondary my-3">Server task 1</a><br>
-    <a href="https://github.com/Marcin-Fraszczak/django_baseuser/blob/railway/users/tests/test_task2.py"
-    class="btn btn-lg btn-outline-secondary my-3">Server task 2</a><br>
+
+    <h3 class="mt-3">Code for the tests on the server:</h3>
+    <div class="d-flex justify-content-center">
+        <div class="row m-2">
+            <div class="col-12 col-md-6">
+                <a href="https://github.com/Marcin-Fraszczak/django_baseuser/blob/railway/users/tests/test_task1.py"
+                   class="btn btn-lg btn-outline-secondary my-1">Server task 1</a>
+            </div>
+            <div class="col-12 col-md-6">
+                <a href="https://github.com/Marcin-Fraszczak/django_baseuser/blob/railway/users/tests/test_task2.py"
+                   class="btn btn-lg btn-outline-secondary my-1">Server task 2</a>
+            </div>
+        </div>
+    </div>
 
     <a href="https://pytest-selenium-tests-production.up.railway.app/"
-    class="btn btn-success mx-1 w-50 shadow mt-5">
+       class="btn btn-success mx-1 w-50 shadow mt-5">
         Run live Selenium tests!
     </a>
 
-    <h2 class="mt-5">Code for the Selenium tests:</h2>
-    <a href="https://github.com/Marcin-Fraszczak/pytest-selenium-tests/blob/master/test_task_1.py"
-    class="btn btn-lg btn-outline-secondary my-3">Selenium task 1</a><br>
-    <a href="https://github.com/Marcin-Fraszczak/pytest-selenium-tests/blob/master/test_task_2.py"
-    class="btn btn-lg btn-outline-secondary my-3">Selenium task 2</a><br>
+    <h3 class="mt-3">Code for the Selenium tests:</h3>
+    <div class="d-flex justify-content-center">
+        <div class="row m-2">
+            <div class="col-12 col-md-6">
+                <a href="https://github.com/Marcin-Fraszczak/pytest-selenium-tests/blob/master/test_task_1.py"
+                   class="btn btn-lg btn-outline-secondary my-1">Selenium task 1</a>
+            </div>
+            <div class="col-12 col-md-6">
+                <a href="https://github.com/Marcin-Fraszczak/pytest-selenium-tests/blob/master/test_task_2.py"
+                   class="btn btn-lg btn-outline-secondary my-1">Selenium task 2</a>
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}
 
