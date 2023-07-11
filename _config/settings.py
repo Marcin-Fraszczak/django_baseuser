@@ -28,8 +28,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False)
 
-# ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', '*')]
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', '*')]
+# ALLOWED_HOSTS = ['localhost']
 
 CSRF_TRUSTED_ORIGINS = ['https://self-testing.up.railway.app']
 CSRF_COOKIE_SECURE = True
